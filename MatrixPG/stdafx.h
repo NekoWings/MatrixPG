@@ -10,9 +10,11 @@
 #include <stdio.h>
 #include <tchar.h>
 #include <iostream>
+#include <iomanip>
 #include <cstdlib>
 #include <ctime>
 #include <stack>
+#include <queue>
 
 
 
