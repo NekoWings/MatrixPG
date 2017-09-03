@@ -7,13 +7,14 @@ int MatrixOri[LEN][LEN] = { 0 };//原始矩阵
 int MatrixT[LEN][LEN] = { 0 };//变化矩阵
 int MatrixFlag[LEN][LEN] = { 0 };//标记矩阵
 int T;//阈值
-int JUDGE;//选上选下（不考虑相等）
 
 void inMatrix();//读取矩阵文件
 void buildMatrix();//创建矩阵文件
 void printMatrixOri();//打印矩阵
 void printMatrixT();
 int selectConditions();//选择区域增长条件
+
+
 
 using namespace std;
 class point
@@ -43,22 +44,21 @@ public:
 	}
 };
 
-static point connet4s[4] = { point(0,-1),point(-1,0) ,point(0,1) ,point(1,0) };
-static point connet8s[8] = { point(-1,-1),point(-1,0),point(-1,1) ,point(0,-1) ,point(0,1),point(1,-1) ,point(1,0) ,point(1,1) };
+static point connet4s[4] = { point(-1,0),point(1,0) ,point(0,-1) ,point(0,1) };
+
 void setFlag(point p);//标记
-int aves4(int tx, int ty);
-int aves8(int tx, int ty);
 point selectSeed();
 
 int main()
 {
 	printf("Functions:\n");
 	printf("0-----EXIT\n");
-	printf("  -----selectSeed()\n");
-	printf("  -----selectConditions()\n");
 	printf("1-----buildMatrix()\n");
 	printf("2-----inMatrix();\n");
 	printf("3-----printMatrixOri()\n");
+	printf("  -----selectSeed()\n");
+	printf("  -----selectConditions()\n");
+
 
 	int sel;
 	while (cin >> sel)
@@ -78,6 +78,7 @@ int main()
 			cout << "exit\n" << endl;
 			break;
 		}
+
 		if (sel == 0)
 			break;
 	}
@@ -86,145 +87,59 @@ int main()
 	setFlag(seed);
 	int condition = selectConditions();
 
-	//BUILD QUEUE
-	queue <point> seeds;
+	//nuclear code
+
+	stack<point> seeds;
 	seeds.push(seed);
 
-	//DATE PROCESSING
-	switch (condition)
+	while (!seeds.empty())
 	{
-	case 1://阈值增长
-		while (!seeds.empty())
+		point seed = seeds.top();
+		seeds.pop();
+
+		setFlag(seed);
+
+		for (size_t i = 0; i < 4; i++)
 		{
-			point seed = seeds.front();
-			seeds.pop();
-			setFlag(seed);
+			int tx = seed.x + connet4s[i].x;
+			int ty = seed.y + connet4s[i].y;
 
-			for (size_t i = 0; i < 4; i++)
+			cout << "(" << tx << "," << ty << ")" << endl;
+
+
+
+			if (tx<0 || ty<0 || tx>LEN || ty>LEN)
+				continue;
+			if (MatrixFlag[tx][ty] == 0)
 			{
-				int tx = seed.x + connet4s[i].x;
-				int ty = seed.y + connet4s[i].y;
-
-				cout << "(" << tx << "," << ty << ")" << endl;//……………………
-
-				if (tx<0 || ty<0 || tx>LEN || ty>LEN)
-					continue;
-				if (MatrixFlag[tx][ty] == 0)//unsigned
+				switch (condition)
 				{
-					if( (MatrixOri[tx][ty] > T)&& (JUDGE == 0))//Bigger than T
+				case 1:
+					if (MatrixOri[tx][ty]>T)
 					{
-						cout << "(" << tx << "," << ty << ")√num:" << MatrixOri[tx][ty] << endl;//……………………
-						MatrixT[tx][ty] = 1;//grow
-						MatrixFlag[tx][ty] = 1;//Setflag
-						seeds.push(point(tx, ty));//seed into queue
-						printMatrixT(); system("pause");//……………………
-					}
-					if ((MatrixOri[tx][ty] < T)&&(JUDGE==1))//Smaller than T
-					{
-						cout << "(" << tx << "," << ty << ")√num:" << MatrixOri[tx][ty] << endl;//……………………
+						
+						cout << "(" << tx << "," << ty << ")√num:" << MatrixOri[tx][ty] << endl;
 						MatrixT[tx][ty] = 1;//grow
 						MatrixFlag[tx][ty] = 1;//grow
-						seeds.push(point(tx, ty));//seed into queue
-						printMatrixT(); system("pause");//……………………
+						seeds.push(point(tx, ty));//seed into stack
+
+						printMatrixT(); system("pause");
 					}
+
+					break;
+				default:
+					cout << "building" << endl;
+					break;
 				}
 			}
 		}
-		cout << "grow end" << endl;
-
-		printMatrixT(); system("pause");
-		break;
-	case 2://4邻域增长
-		int ave4;
-		while (!seeds.empty())
-		{
-			point seed = seeds.front();
-			seeds.pop();
-			setFlag(seed);
-
-			for (size_t i = 0; i < 4; i++)
-			{
-				int tx = seed.x + connet4s[i].x;
-				int ty = seed.y + connet4s[i].y;
-
-				cout << "(" << tx << "," << ty << ")" << endl;//……………………
-
-				if (tx<0 || ty<0 || tx>LEN || ty>LEN)
-					continue;
-
-				if (MatrixFlag[tx][ty] == 0)//unsigned
-				{
-					ave4 = aves4(tx,ty);
-					if ((ave4 > T) && (JUDGE == 0))//Bigger than T
-					{
-						cout << "(" << tx << "," << ty << ")√avenum:" << ave4 << endl;//……………………
-						MatrixT[tx][ty] = 1;//grow
-						MatrixFlag[tx][ty] = 1;//Setflag
-						seeds.push(point(tx, ty));//seed into queue
-						printMatrixT(); system("pause");//……………………
-					}
-					if ((ave4 < T) && (JUDGE == 1))//Smaller than T
-					{
-						cout << "(" << tx << "," << ty << ")√avenum:" << ave4 << endl;//……………………
-						MatrixT[tx][ty] = 1;//grow
-						MatrixFlag[tx][ty] = 1;//grow
-						seeds.push(point(tx, ty));//seed into queue
-						printMatrixT(); system("pause");//……………………
-					}
-				}
-			}
-		}
-		cout << "grow end" << endl;
-		printMatrixT(); system("pause");
-		break;
-	case 3://8邻域增长
-		int ave8;
-		while (!seeds.empty())
-		{
-			point seed = seeds.front();
-			seeds.pop();
-			setFlag(seed);
-
-			for (size_t i = 0; i < 4; i++)
-			{
-				int tx = seed.x + connet4s[i].x;
-				int ty = seed.y + connet4s[i].y;
-
-				cout << "(" << tx << "," << ty << ")" << endl;//……………………
-
-				if (tx<0 || ty<0 || tx>LEN || ty>LEN)
-					continue;
-
-				if (MatrixFlag[tx][ty] == 0)//unsigned
-				{
-					ave8 = aves8(tx, ty);
-					if ((ave8 > T) && (JUDGE == 0))//Bigger than T
-					{
-						cout << "(" << tx << "," << ty << ")√avenum:" << ave8 << endl;//……………………
-						MatrixT[tx][ty] = 1;//grow
-						MatrixFlag[tx][ty] = 1;//Setflag
-						seeds.push(point(tx, ty));//seed into queue
-						printMatrixT(); system("pause");//……………………
-					}
-					if ((ave8 < T) && (JUDGE == 1))//Smaller than T
-					{
-						cout << "(" << tx << "," << ty << ")√avenum:" << ave8 << endl;//……………………
-						MatrixT[tx][ty] = 1;//grow
-						MatrixFlag[tx][ty] = 1;//grow
-						seeds.push(point(tx, ty));//seed into queue
-						printMatrixT(); system("pause");//……………………
-					}
-				}
-			}
-		}
-		cout << "grow end" << endl;
-		printMatrixT(); system("pause");
-		break;
-	default:
-		break;
 	}
-	//nuclear code
-	//stack<point> seeds;
+
+	cout << "grow end" << endl;
+	
+	printMatrixT(); system("pause");
+
+
 	system("pause");
     return 0;
 }
@@ -306,7 +221,7 @@ void printMatrixOri()
 	{
 		for (int j = 0; j < LEN; j++)
 		{
-			cout << setw(4) << MatrixOri[i][j];
+			cout << MatrixOri[i][j] << " ";
 		}
 		cout << "\n";
 	}		
@@ -342,7 +257,7 @@ int selectConditions()
 	printf("2-----4邻域平均值\n");
 	printf("3-----8邻域平均值\n\n");
 
-	int t=0,t2=0;
+	int t;
 	while (cin >> t)
 	{
 		switch (t)
@@ -351,18 +266,17 @@ int selectConditions()
 			cout << "阈值增长\n" << endl;
 			cout << "请输入阈值T：";
 			cin >> T;
-			cout << "若大于阈值T增长请扣0\n若大于阈值T增长请扣1\n";
+			cout << "若大于阈值T增长请扣1\n若大于阈值T增长请扣2\n";
+			int t2;
 			while (cin >> t2)
 			{
 				switch (t2)
 				{
-				case 0:
-					JUDGE = 0;
-					return 1;
-					break;
 				case 1:
-					JUDGE = 1;
-					return 1;
+					return 1;//>T
+					break;
+				case 2:
+					return 0;//<T
 					break;
 				default:
 					cout << "error input" << endl;
@@ -370,95 +284,12 @@ int selectConditions()
 				}
 			}
 			break;
-		case 2:
-			cout << "4邻域平均值\n" << endl;
-			cout << "请输入阈值T：";
-			cin >> T;
-			cout << "若大于阈值T增长请扣0\n若大于阈值T增长请扣1\n";
-			while (cin >> t2)
-			{
-				switch (t2)
-				{
-				case 0:
-					JUDGE = 0;
-					return 2;
-					break;
-				case 1:
-					JUDGE = 1;
-					return 2;
-					break;
-				default:
-					cout << "error input" << endl;
-					break;
-				}
-			}
+		/*case 2:
+			static point connet4[4];
 			break;
 		case 3:
-			cout << "8邻域平均值\n" << endl;
-
-			cout << "请输入阈值T：";
-			cin >> T;
-			cout << "若大于阈值T增长请扣0\n若大于阈值T增长请扣1\n";
-			while (cin >> t2)
-			{
-				switch (t2)
-				{
-				case 0:
-					JUDGE = 0;
-					return 3;
-					break;
-				case 1:
-					JUDGE = 1;
-					return 3;
-					break;
-				default:
-					cout << "error input" << endl;
-					break;
-				}
-			}
-			break;
+			static point connet8[8];
+			break;*/
 		}
 	}
-}
-int aves4(int tx, int ty)
-{
-	int ave=0;
-	double sum = 0;
-	double num = 4;
-	for (size_t i = 0; i < 4; i++)
-	{
-		int x = tx + connet4s[i].x;
-		int y = ty + connet4s[i].y;
-		
-		if (x<0 || y<0 || x>LEN || y>LEN)
-		{
-			num--;
-			continue;
-		}
-		sum = sum + MatrixOri[x][y];
-	}
-	ave = (int)(sum / num - 0.5);
-	//cout << ave << endl; system("pause");
-	return ave;
-}
-int aves8(int tx, int ty)
-{
-	int ave = 0;
-	double sum = 0;
-	double num = 8;
-	for (size_t i = 0; i < 8; i++)
-	{
-		int x = tx + connet8s[i].x;
-		int y = ty + connet8s[i].y;
-
-		if (x<0 || y<0 || x>LEN || y>LEN)
-		{
-			num--;
-			continue;
-		}
-		sum = sum + MatrixOri[x][y];
-	}
-	ave = (int)(sum / num - 0.5);
-	//cout << ave << endl; system("pause");
-	return ave;
 }
