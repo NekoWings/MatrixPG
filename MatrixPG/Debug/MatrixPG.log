@@ -1,0 +1,6 @@
+﻿  MatrixPG.cpp
+c:\users\jayfe\onedrive\workspace\coding\c&c++\classdesign\pc\matrixpg\matrixpg\matrixpg.cpp(255): warning C4474: fscanf_s: 格式字符串中传递的参数太多
+  c:\users\jayfe\onedrive\workspace\coding\c&c++\classdesign\pc\matrixpg\matrixpg\matrixpg.cpp(255): note: 占位符和其参数预计 1 可变参数，但提供的却是 2 参数
+c:\users\jayfe\onedrive\workspace\coding\c&c++\classdesign\pc\matrixpg\matrixpg\matrixpg.cpp(422): warning C4715: “selectConditions”: 不是所有的控件路径都返回值
+  MatrixPG.vcxproj -> C:\Users\Jayfe\OneDrive\workSpace\Coding\C&C++\classDesign\PC\MatrixPG\Debug\MatrixPG.exe
+  MatrixPG.vcxproj -> C:\Users\Jayfe\OneDrive\workSpace\Coding\C&C++\classDesign\PC\MatrixPG\Debug\MatrixPG.pdb (Full PDB)
