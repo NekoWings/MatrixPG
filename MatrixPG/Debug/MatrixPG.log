@@ -1,6 +1,27 @@
-﻿  MatrixPG.cpp
-c:\users\jayfe\onedrive\workspace\coding\c&c++\classdesign\pc\matrixpg\matrixpg\matrixpg.cpp(255): warning C4474: fscanf_s: 格式字符串中传递的参数太多
-  c:\users\jayfe\onedrive\workspace\coding\c&c++\classdesign\pc\matrixpg\matrixpg\matrixpg.cpp(255): note: 占位符和其参数预计 1 可变参数，但提供的却是 2 参数
-c:\users\jayfe\onedrive\workspace\coding\c&c++\classdesign\pc\matrixpg\matrixpg\matrixpg.cpp(422): warning C4715: “selectConditions”: 不是所有的控件路径都返回值
-  MatrixPG.vcxproj -> C:\Users\Jayfe\OneDrive\workSpace\Coding\C&C++\classDesign\PC\MatrixPG\Debug\MatrixPG.exe
-  MatrixPG.vcxproj -> C:\Users\Jayfe\OneDrive\workSpace\Coding\C&C++\classDesign\PC\MatrixPG\Debug\MatrixPG.pdb (Full PDB)
+﻿生成启动时间为 2017/9/9 12:25:15。
+     1>项目“C:\Users\Jayfe\OneDrive\workSpace\Coding\C&C++\classDesign\Surface\MatrixPG\MatrixPG\MatrixPG.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\MatrixPG.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt MatrixPG.cpp
+         MatrixPG.cpp
+     1>c:\users\jayfe\onedrive\workspace\coding\c&c++\classdesign\surface\matrixpg\matrixpg\matrixpg.cpp(414): warning C4474: fscanf_s: 格式字符串中传递的参数太多
+         c:\users\jayfe\onedrive\workspace\coding\c&c++\classdesign\surface\matrixpg\matrixpg\matrixpg.cpp(414): note: placeholders and their parameters expect 1 variadic arguments, but 2 were provided
+     1>c:\users\jayfe\onedrive\workspace\coding\c&c++\classdesign\surface\matrixpg\matrixpg\matrixpg.cpp(434): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\conio.h(452): note: 参见“getch”的声明
+     1>c:\users\jayfe\onedrive\workspace\coding\c&c++\classdesign\surface\matrixpg\matrixpg\matrixpg.cpp(502): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\conio.h(452): note: 参见“getch”的声明
+     1>c:\users\jayfe\onedrive\workspace\coding\c&c++\classdesign\surface\matrixpg\matrixpg\matrixpg.cpp(531): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\conio.h(452): note: 参见“getch”的声明
+     1>c:\users\jayfe\onedrive\workspace\coding\c&c++\classdesign\surface\matrixpg\matrixpg\matrixpg.cpp(560): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\conio.h(452): note: 参见“getch”的声明
+     1>c:\users\jayfe\onedrive\workspace\coding\c&c++\classdesign\surface\matrixpg\matrixpg\matrixpg.cpp(679): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\conio.h(452): note: 参见“getch”的声明
+     1>c:\users\jayfe\onedrive\workspace\coding\c&c++\classdesign\surface\matrixpg\matrixpg\matrixpg.cpp(585): warning C4715: “selectConditions”: 不是所有的控件路径都返回值
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Jayfe\OneDrive\workSpace\Coding\C&C++\classDesign\Surface\MatrixPG\Debug\MatrixPG.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\Jayfe\OneDrive\workSpace\Coding\C&C++\classDesign\Surface\MatrixPG\Debug\MatrixPG.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Jayfe\OneDrive\workSpace\Coding\C&C++\classDesign\Surface\MatrixPG\Debug\MatrixPG.lib" /MACHINE:X86 Debug\MatrixPG.obj
+         Debug\stdafx.obj
+         MatrixPG.vcxproj -> C:\Users\Jayfe\OneDrive\workSpace\Coding\C&C++\classDesign\Surface\MatrixPG\Debug\MatrixPG.exe
+     1>已完成生成项目“C:\Users\Jayfe\OneDrive\workSpace\Coding\C&C++\classDesign\Surface\MatrixPG\MatrixPG\MatrixPG.vcxproj”(Build 个目标)的操作。
+
+已成功生成。
+
+已用时间 00:00:00.96
